@@ -31,13 +31,13 @@ db.sequelize.sync(); // for production
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to myTutorials application." });
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 require("./app/routes/turorial.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8081;
-app.listen(PORT, (req,res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
