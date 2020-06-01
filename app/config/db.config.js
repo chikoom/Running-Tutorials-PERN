@@ -20,7 +20,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
  
 //Models/tables
-db.customers = require('../models/tutorial.model.js')(sequelize, Sequelize);
+db.tutorials = require('../models/tutorial.model.js')(sequelize, Sequelize);
  
  
 module.exports = db;
