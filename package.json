@@ -1,0 +1,29 @@
+{
+  "name": "running-tutorials",
+  "version": "1.0.0",
+  "description": "WebApp tracking my recent and current tutorials - Pending, In-Progress and Done",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Tutorials",
+    "Node.js.",
+    "Heroku",
+    "Express",
+    "React",
+    "Postgresql",
+    "Sequelize"
+  ],
+  "author": "Chikoom - Idan Baron",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "13.12.x",
+    "npm": "6.14.x"
+  }
+}
