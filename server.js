@@ -29,6 +29,9 @@ const db = require('./app/config/db.config.js');
 // });
 db.sequelize.sync(); // for production
 
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'build')));
+
 // simple route
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
