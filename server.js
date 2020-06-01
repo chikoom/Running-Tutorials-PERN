@@ -23,10 +23,10 @@ const db = require('./app/config/db.config.js');
 
 
 // re-sync db with drop tables for development
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
-//db.sequelize.sync(); // for production
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
+db.sequelize.sync(); // for production
 
 // simple route
 app.get("/", (req, res) => {
