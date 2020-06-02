@@ -5,9 +5,17 @@ const path = require('path');
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:8080"
-};
+var corsOptions;
+if (process.env.DATABASE_URL) {
+  corsOptions = {
+    origin: "https://https://running-tutorials.herokuapp.com/"
+  };
+} else {
+  corsOptions = {
+    origin: "http://localhost:8080"
+  };
+}
+
 
 app.use(cors(corsOptions));
 
