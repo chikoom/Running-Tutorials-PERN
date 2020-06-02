@@ -2,6 +2,8 @@ import axios from "axios";
 
 let axiosExport;
 
+console.log(process.env.DATABASE_URL)
+
 if (process.env.DATABASE_URL) {
   axiosExport = axios.create({
     baseURL: "https://running-tutorials.herokuapp.com/api",
