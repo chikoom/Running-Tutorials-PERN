@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TutorialDataService from "../services/TutorialService";
+import ImageInput from '../services/ImageInput'
 
 const AddTutorial = () => {
   const initialTutorialState = {
@@ -145,6 +146,8 @@ const AddTutorial = () => {
               <option>started</option>
               <option>done</option>
             </select>
+
+            <ImageInput />
           </div>
 
           <button onClick={saveTutorial} className="btn btn-success">
