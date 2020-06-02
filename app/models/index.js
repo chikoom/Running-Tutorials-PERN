@@ -1,6 +1,6 @@
 const optionalRequire = require('optional-require');
 
-const env = optionalRequire('../config/env.js');
+const localenv = optionalRequire('../config/env.js');
 
 const Sequelize = require('sequelize');
 
@@ -18,19 +18,21 @@ if (process.env.DATABASE_URL) {
   
 } else {
 
-  sequelize = new Sequelize(env.database, env.username, env.password, {
-    host: env.host,
-    dialect: env.dialect,
-    operatorsAliases: false,
+  sequelize = new Sequelize(process.env.DATABASE, process.env.DBUSERNAME, process.env.DBPASSWORD, {
+    host: process.env.DBHOST,
+    dialect: process.env.DBDIALECT,
+    operatorsAliases: 0,
     pool: {
-      max: env.max,
-      min: env.pool.min,
-      acquire: env.pool.acquire,
-      idle: env.pool.idle
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
     }
   });
 
 }
+
+
  
 const db = {};
  
