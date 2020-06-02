@@ -11,6 +11,9 @@
 # production
 /build
 
+# DB FILES
+/app/config
+
 # misc
 .DS_Store
 .env.test
@@ -43,4 +46,3 @@ pids
 *.seed
 *.pid.lock
 
-# DB FILES
