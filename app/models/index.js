@@ -1,5 +1,7 @@
-const env = require('../config/env.js');
- 
+import optionalRequire from 'optional-require'
+
+const env = optionalRequire('../config/env.js');
+
 const Sequelize = require('sequelize');
 
 let sequelize
