@@ -6,11 +6,13 @@ import './App.css';
 import AddTutorial from "./components/AddTutorial";
 import Tutorial from "./components/Tutorial";
 import TutorialsList from "./components/TutorialsList";
+import HeroImage from './components/HeroImage';
 
 
 function App() {
   return (
     <Router>
+      <HeroImage />
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <a href="/tutorials" className="navbar-brand">
