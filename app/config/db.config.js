@@ -4,6 +4,8 @@ const Sequelize = require('sequelize');
 
 let sequelize
 
+console.log('dbcon'+process.env.IS_PROD)
+console.log('dbcon-DBURL'+process.env.DATABASE_URL)
 
 if (process.env.DATABASE_URL) {
 

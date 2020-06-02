@@ -2,7 +2,7 @@ import axios from "axios";
 
 let axiosExport;
 
-console.log(process.env.DATABASE_URL)
+console.log('httpc'+process.env.IS_PROD)
 
 if (process.env.DATABASE_URL) {
   axiosExport = axios.create({

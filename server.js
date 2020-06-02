@@ -5,6 +5,8 @@ const path = require('path');
 
 const app = express();
 
+console.log('srvjs'+process.env.IS_PROD)
+
 var corsOptions;
 if (process.env.DATABASE_URL) {
   corsOptions = {
