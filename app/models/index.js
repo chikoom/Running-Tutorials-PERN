@@ -1,4 +1,4 @@
-import optionalRequire from 'optional-require'
+const optionalRequire = require('optional-require');
 
 const env = optionalRequire('../config/env.js');
 
