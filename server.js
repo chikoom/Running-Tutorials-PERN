@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // sync postgresqi with sequelize using the models
 //const db = require("./app/models/tutorial.model.js");
 
-const db = require('./app/config/db.config.js');
+const db = require('./app/models/index.js');
 
 
 // re-sync db with drop tables for development
