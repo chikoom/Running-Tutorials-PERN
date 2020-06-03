@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import TutorialDataService from '../services/TutorialService';
-import { Link } from 'react-router-dom';
-import defaultImage from '../assets/default-tut-image.jpg';
 import TitledTutorialList from './TitledTutorialList';
-import TutorailPreview from './TutorialPreview';
+import escapeRegExp from 'escape-string-regexp'
 
 const TutorialsList = ({status}) => {
   const [tutorials, setTutorials] = useState([]);
+  const [tutorialsShown, setTutorialsShown] = useState([]);
 
-  const [startedTutorials, setStartedTutorials] = useState([]);
-  const [waitingTutorials, setWaitingTutorials] = useState([]);
-  const [doneTutorials, setDoneTutorials] = useState([]);
-
-  const [currentTutorial, setCurrentTutorial] = useState(null);
   const [currentId, setCurrentId] = useState(-1);
   const [searchTitle, setSearchTitle] = useState("");
 
@@ -23,43 +17,28 @@ const TutorialsList = ({status}) => {
   const onChangeSearchTitle = e => {
     const searchTitle = e.target.value;
     setSearchTitle(searchTitle);
+    const match = new RegExp(escapeRegExp(searchTitle),'i');
+    setTutorialsShown(tutorials.filter(tutorial => match.test(tutorial.title)));
   };
 
   const retrieveTutorials = () => {
     TutorialDataService.getAll()
       .then(response => {
-        //setTutorials(response.data);
-        setStartedTutorials(response.data.filter(tutorial => tutorial.status === 'started'));
-        setWaitingTutorials(response.data.filter(tutorial => tutorial.status === 'waiting'));
-        setDoneTutorials(response.data.filter(tutorial => tutorial.status === 'done'));
-
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
-  const retrieveTutorialsByStatus = (status) => {
-    TutorialDataService.findByStatus(status)
-      .then(response => {
         setTutorials(response.data);
+        setTutorialsShown(response.data);
         console.log(response.data);
       })
       .catch(e => {
         console.log(e);
       });
   };
-
 
   const refreshList = () => {
     retrieveTutorials();
-    setCurrentTutorial(null);
     setCurrentId(-1);
   };
 
   const setActiveTutorial = (tutorial, id) => {
-    setCurrentTutorial(tutorial);
     setCurrentId(id);
   };
 
@@ -77,9 +56,8 @@ const TutorialsList = ({status}) => {
   const findByTitle = () => {
     TutorialDataService.findByTitle(searchTitle)
       .then(response => {
-        setStartedTutorials(response.data.filter(tutorial => tutorial.status === 'started'));
-        setWaitingTutorials(response.data.filter(tutorial => tutorial.status === 'waiting'));
-        setDoneTutorials(response.data.filter(tutorial => tutorial.status === 'done'));
+        setTutorials(response.data);
+        setTutorialsShown(response.data);
         console.log(response.data);
       })
       .catch(e => {
@@ -112,19 +90,19 @@ const TutorialsList = ({status}) => {
       <div className="col-md-8">
 
         <TitledTutorialList heading="Started Tutorials List"
-                            tutorials={startedTutorials} 
+                            tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'started')}
                             currentId={currentId}
                             setActiveTutorial={setActiveTutorial}
                             />
         
         <TitledTutorialList heading="Waiting Tutorials List"
-                            tutorials={waitingTutorials} 
+                            tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'waiting')} 
                             currentId={currentId}
                             setActiveTutorial={setActiveTutorial}
                             />
         
         <TitledTutorialList heading="Done Tutorials List"
-                            tutorials={doneTutorials} 
+                            tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'done')} 
                             currentId={currentId}
                             setActiveTutorial={setActiveTutorial}
                             />

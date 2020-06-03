@@ -112,3 +112,13 @@
   right: 0;
   top: 0;
 }
+
+.tutorial-ref-link{
+  color: #FFF;
+  text-decoration: underline;
+}
+
+.tutorial-ref-link:visited{
+  color: #FFF;
+  text-decoration: underline;
+}

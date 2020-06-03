@@ -28,9 +28,10 @@ const TutorialPreview = ({tutorial, isActive, setActiveTutorial}) => {
       </div>
       <div>
         <label>
-          <strong>Link:</strong>
+          <a href={tutorial.link} target="_blank" rel="noopener noreferrer nofollow" ><strong className="tutorial-ref-link">Link To Content</strong></a>
+          
         </label>{" "}
-        {tutorial.link}
+        
       </div>
       <div>
         <label>
@@ -44,13 +45,6 @@ const TutorialPreview = ({tutorial, isActive, setActiveTutorial}) => {
           <strong>Is publsihed:</strong>
         </label>{" "}
         {tutorial.published ? "Published" : "Pending"}
-      </div>
-
-      <div>
-        <label>
-          <strong>Image:</strong>
-        </label>{" "}
-        {tutorial.imgurl}
       </div>
 
       <Link
