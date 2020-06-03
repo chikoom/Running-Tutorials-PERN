@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 
 export default function App(props) {
-  const [image, setImage] = useState({ preview: "", raw: "" });
+  const [image, setImage] = useState({ preview: ""});
 
   const handleChange = e => {
     if (e.target.files.length) {
-      setImage({
-        preview: URL.createObjectURL(e.target.files[0]),
-        raw: e.target.files[0]
-      });
+      // setImage({
+      //   preview: URL.createObjectURL(e.target.files[0]),
+      //   raw: e.target.files[0]
+      // });
+      
+      handleUpload(e)
     }
   };
 
   const handleUpload = async e => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", image.raw);
+    //formData.append("file", image.raw);
+
+    formData.append("file", e.target.files[0]);
+
+
+
     //formData.append("api_key", '813213351239598');
     //formData.append("api_secret", 'Z-XrqgZVyR3pALVwujCKSLME0ys');
 
@@ -32,10 +39,13 @@ export default function App(props) {
       .then(res => {
         console.log(res)
         props.onImgUpdate(res.url)
+        setImage({
+          preview: res.url
+        });
       })
       .catch(err => console.log(err));
 
-    console.log(upload_return)
+    //console.log(upload_return)
 
   //   await fetch("YOUR_URL", {
   //     method: "POST",
