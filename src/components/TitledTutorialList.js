@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import TutorailPreview from './TutorialPreview';
 
-const TitledTutorialList = ({heading, tutorials, currentId, setActiveTutorial}) => {
+const TitledTutorialList = ({heading, tutorials, currentId, setActiveTutorial, statusClass}) => {
   return(
     <div>
       <h4 className="list-tutorial-heading">{heading}</h4>
-      <ul className="list-group">
+      <ul className={`list-group ${statusClass}`}>
         {tutorials &&
           tutorials.map((tutorial, index) => (
             <li

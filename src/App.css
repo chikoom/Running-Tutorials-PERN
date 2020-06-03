@@ -122,3 +122,19 @@
   color: #FFF;
   text-decoration: underline;
 }
+
+ul.started li{
+ background-color: #fdfadf;
+}
+
+ul.waiting li{
+  background-color: #ffeeee;
+ }
+
+ ul.done li{
+  background-color: #defedf;
+ }
+
+.list-group-item.active{
+  background-color: #525252;
+ }

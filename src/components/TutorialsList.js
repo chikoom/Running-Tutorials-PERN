@@ -89,22 +89,25 @@ const TutorialsList = ({status}) => {
       </div>
       <div className="col-md-8">
 
-        <TitledTutorialList heading="Started Tutorials List"
+        <TitledTutorialList heading="Started Tutorials:"
                             tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'started')}
                             currentId={currentId}
                             setActiveTutorial={setActiveTutorial}
+                            statusClass="started"
                             />
         
-        <TitledTutorialList heading="Waiting Tutorials List"
+        <TitledTutorialList heading="Waiting Tutorials:"
                             tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'waiting')} 
                             currentId={currentId}
                             setActiveTutorial={setActiveTutorial}
+                            statusClass="waiting"
                             />
         
-        <TitledTutorialList heading="Done Tutorials List"
+        <TitledTutorialList heading="Finished Tutorials:"
                             tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'done')} 
                             currentId={currentId}
                             setActiveTutorial={setActiveTutorial}
+                            statusClass="done"
                             />
         
 
