@@ -63,7 +63,7 @@ export default function App(props) {
           <img src={image.preview} alt="dummy" width="300" height="300" />
         ) : (
           <>
-            <h5 className="text-center">Upload your photo</h5>
+            <h5 className="text-center">Upload photo</h5>
           </>
         )}
       </label>
@@ -73,8 +73,6 @@ export default function App(props) {
         style={{ display: "none" }}
         onChange={handleChange}
       />
-      <br />
-      <button onClick={handleUpload}>Upload</button>
     </div>
   );
 }

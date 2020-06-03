@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TutorialDataService from '../services/TutorialService';
 import { Link } from 'react-router-dom';
+import defaultImage from '../assets/default-tut-image.jpg';
 
 const TutorialsList = () => {
   const [tutorials, setTutorials] = useState([]);
@@ -111,13 +112,8 @@ const TutorialsList = () => {
       <div className="col-md-6">
         {currentTutorial ? (
           <div>
-            <h4>Tutorial</h4>
-            <div>
-              <label>
-                <strong>Title:</strong>
-              </label>{" "}
-              {currentTutorial.title}
-            </div>
+            <div className="tutorial-preview-image" style={{backgroundImage:`url(${(currentTutorial.imgurl)? currentTutorial.imgurl : defaultImage})`}}></div>
+            <h4>{currentTutorial.title}</h4>
             <div>
               <label>
                 <strong>Description:</strong>

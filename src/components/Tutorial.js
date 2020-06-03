@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import TutorialDataService from "../services/TutorialService";
+import defaultImage from '../assets/default-tut-image.jpg';
+import ImageInput from '../services/ImageInput'
+
 
 const Tutorial = props => {
   const initialTutorialState = {
@@ -76,11 +79,17 @@ const Tutorial = props => {
       });
   };
 
+  const updateImgurl = (value) => {
+    console.log('change img value: '+value);
+    setCurrentTutorial({ ...currentTutorial, 'imgurl': value });
+  }
+
   return (
     <div>
       {currentTutorial ? (
         <div className="edit-form">
           <h4>Tutorial</h4>
+          <div className="tutorial-preview-image" style={{backgroundImage:`url(${(currentTutorial.imgurl)? currentTutorial.imgurl : defaultImage})`}}></div>
           <form>
             <div className="form-group">
               <label htmlFor="title">Title</label>
@@ -161,7 +170,7 @@ const Tutorial = props => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="imgurl">Image</label>
+              <label htmlFor="imgurl">Image Url</label>
               <input
                 type="text"
                 className="form-control"
@@ -172,6 +181,8 @@ const Tutorial = props => {
                 name="imgurl"
               />
             </div>
+
+            <ImageInput onImgUpdate={updateImgurl} />
 
             <div className="form-group">
               <label>
