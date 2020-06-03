@@ -38,9 +38,9 @@ export default function App(props) {
       .then(res => res.json())
       .then(res => {
         console.log(res)
-        props.onImgUpdate(res.url)
+        props.onImgUpdate(res.secure_url)
         setImage({
-          preview: res.url
+          preview: res.secure_url
         });
       })
       .catch(err => console.log(err));
