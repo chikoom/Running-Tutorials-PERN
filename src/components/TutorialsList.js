@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TutorialDataService from '../services/TutorialService';
 import { Link } from 'react-router-dom';
 import defaultImage from '../assets/default-tut-image.jpg';
+import TutorailPreview from './TutorialPreview';
 
 const TutorialsList = ({status}) => {
   const [tutorials, setTutorials] = useState([]);
@@ -125,7 +126,10 @@ const TutorialsList = ({status}) => {
                 key={tutorial.id}
               >
                 {tutorial.title}
-              <div class="list-group-item-preview"></div>
+
+
+              <TutorailPreview tutorial={tutorial} isActive={tutorial.id === currentId ? true : false} />
+              
               </li>
             ))}
         </ul>
@@ -143,6 +147,8 @@ const TutorialsList = ({status}) => {
                 key={tutorial.id}
               >
                 {tutorial.title}
+
+                <TutorailPreview tutorial={tutorial} isActive={tutorial.id === currentId ? true : false} />
               </li>
             ))}
         </ul>
@@ -160,6 +166,8 @@ const TutorialsList = ({status}) => {
                 key={tutorial.id}
               >
                 {tutorial.title}
+
+                <TutorailPreview tutorial={tutorial} isActive={tutorial.id === currentId ? true : false} />
               </li>
             ))}
         </ul>
@@ -173,7 +181,7 @@ const TutorialsList = ({status}) => {
       </div>
       <div className="col-md-6">
         {currentTutorial ? (
-          <div className="tutorial-preview-container">
+          <div>
             <div className="tutorial-preview-image" style={{backgroundImage:`url(${(currentTutorial.imgurl)? currentTutorial.imgurl : defaultImage})`}}></div>
             <h4>{currentTutorial.title}</h4>
             <div>
