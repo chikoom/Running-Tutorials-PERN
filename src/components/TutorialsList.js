@@ -26,7 +26,6 @@ const TutorialsList = ({status}) => {
       .then(response => {
         setTutorials(response.data);
         setTutorialsShown(response.data);
-        console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -45,7 +44,6 @@ const TutorialsList = ({status}) => {
   const removeAllTutorials = () => {
     TutorialDataService.removeAll()
       .then(response => {
-        console.log(response.data);
         refreshList();
       })
       .catch(e => {
@@ -58,7 +56,6 @@ const TutorialsList = ({status}) => {
       .then(response => {
         setTutorials(response.data);
         setTutorialsShown(response.data);
-        console.log(response.data);
       })
       .catch(e => {
         console.log(e);

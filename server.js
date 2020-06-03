@@ -1,7 +1,10 @@
 require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
-const cloudinary = require('cloudinary')
+const cloudinary = require('cloudinary');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
+
 
 const cors = require("cors");
 const path = require('path');

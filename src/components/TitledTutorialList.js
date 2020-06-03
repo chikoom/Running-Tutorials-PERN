@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import TutorailPreview from './TutorialPreview';
 
 const TitledTutorialList = ({heading, tutorials, currentId, setActiveTutorial, statusClass}) => {

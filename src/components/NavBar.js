@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
+    
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <a href="/tutorials" className="navbar-brand">
           My Tutorials
