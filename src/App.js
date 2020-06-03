@@ -18,7 +18,12 @@ function App() {
         <NavBar />
 
         <div className="container mt-3">
-            <Route exact path={["/", "/tutorials"]} component={TutorialsList} />
+            
+            <Route exact path={["/", "/tutorials"]} render={() => (
+              <TutorialsList 
+              status="started" 
+              />
+            )} />
             <Route exact path="/add" component={AddTutorial} />
             <Route path="/tutorials/:id" component={Tutorial} />
         </div>

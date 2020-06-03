@@ -3,10 +3,15 @@ import TutorialDataService from '../services/TutorialService';
 import { Link } from 'react-router-dom';
 import defaultImage from '../assets/default-tut-image.jpg';
 
-const TutorialsList = () => {
+const TutorialsList = ({status}) => {
   const [tutorials, setTutorials] = useState([]);
+
+  const [startedTutorials, setStartedTutorials] = useState([]);
+  const [waitingTutorials, setWaitingTutorials] = useState([]);
+  const [doneTutorials, setDoneTutorials] = useState([]);
+
   const [currentTutorial, setCurrentTutorial] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(-1);
+  const [currentId, setCurrentId] = useState(-1);
   const [searchTitle, setSearchTitle] = useState("");
 
   useEffect(() => {
@@ -21,6 +26,21 @@ const TutorialsList = () => {
   const retrieveTutorials = () => {
     TutorialDataService.getAll()
       .then(response => {
+        //setTutorials(response.data);
+        setStartedTutorials(response.data.filter(tutorial => tutorial.status === 'started'));
+        setWaitingTutorials(response.data.filter(tutorial => tutorial.status === 'waiting'));
+        setDoneTutorials(response.data.filter(tutorial => tutorial.status === 'done'));
+
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  const retrieveTutorialsByStatus = (status) => {
+    TutorialDataService.findByStatus(status)
+      .then(response => {
         setTutorials(response.data);
         console.log(response.data);
       })
@@ -29,15 +49,16 @@ const TutorialsList = () => {
       });
   };
 
+
   const refreshList = () => {
     retrieveTutorials();
     setCurrentTutorial(null);
-    setCurrentIndex(-1);
+    setCurrentId(-1);
   };
 
-  const setActiveTutorial = (tutorial, index) => {
+  const setActiveTutorial = (tutorial, id) => {
     setCurrentTutorial(tutorial);
-    setCurrentIndex(index);
+    setCurrentId(id);
   };
 
   const removeAllTutorials = () => {
@@ -54,13 +75,19 @@ const TutorialsList = () => {
   const findByTitle = () => {
     TutorialDataService.findByTitle(searchTitle)
       .then(response => {
-        setTutorials(response.data);
+        setStartedTutorials(response.data.filter(tutorial => tutorial.status === 'started'));
+        setWaitingTutorials(response.data.filter(tutorial => tutorial.status === 'waiting'));
+        setDoneTutorials(response.data.filter(tutorial => tutorial.status === 'done'));
         console.log(response.data);
       })
       .catch(e => {
         console.log(e);
       });
   };
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   return (
     <div className="list row">
@@ -85,17 +112,52 @@ const TutorialsList = () => {
         </div>
       </div>
       <div className="col-md-6">
-        <h4>Tutorials List</h4>
+        <h4 className="list-tutorial-heading">Started Tutorials List</h4>
 
         <ul className="list-group">
-          {tutorials &&
-            tutorials.map((tutorial, index) => (
+          {startedTutorials &&
+            startedTutorials.map((tutorial, index) => (
               <li
                 className={
-                  "list-group-item " + (index === currentIndex ? "active" : "")
+                  "list-group-item " + (tutorial.id === currentId ? "active" : "")
                 }
-                onClick={() => setActiveTutorial(tutorial, index)}
-                key={index}
+                onClick={() => setActiveTutorial(tutorial, tutorial.id)}
+                key={tutorial.id}
+              >
+                {tutorial.title}
+              <div class="list-group-item-preview"></div>
+              </li>
+            ))}
+        </ul>
+
+        <h4 className="list-tutorial-heading">Waiting Tutorials List</h4>
+
+        <ul className="list-group">
+          {waitingTutorials &&
+            waitingTutorials.map((tutorial, index) => (
+              <li
+                className={
+                  "list-group-item " + (tutorial.id === currentId ? "active" : "")
+                }
+                onClick={() => setActiveTutorial(tutorial, tutorial.id)}
+                key={tutorial.id}
+              >
+                {tutorial.title}
+              </li>
+            ))}
+        </ul>
+        
+        <h4 className="list-tutorial-heading">Done Tutorials List</h4>
+
+        <ul className="list-group">
+          {doneTutorials &&
+            doneTutorials.map((tutorial, index) => (
+              <li
+                className={
+                  "list-group-item " + (tutorial.id === currentId ? "active" : "")
+                }
+                onClick={() => setActiveTutorial(tutorial, tutorial.id)}
+                key={tutorial.id}
               >
                 {tutorial.title}
               </li>
@@ -111,7 +173,7 @@ const TutorialsList = () => {
       </div>
       <div className="col-md-6">
         {currentTutorial ? (
-          <div>
+          <div className="tutorial-preview-container">
             <div className="tutorial-preview-image" style={{backgroundImage:`url(${(currentTutorial.imgurl)? currentTutorial.imgurl : defaultImage})`}}></div>
             <h4>{currentTutorial.title}</h4>
             <div>

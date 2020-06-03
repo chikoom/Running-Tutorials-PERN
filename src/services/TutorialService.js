@@ -28,6 +28,10 @@ const findByTitle = title => {
   return http.get(`/tutorials?title=${title}`);
 };
 
+const findByStatus = status => {
+  return http.get(`/tutorials?status=${status}`);
+};
+
 
 export default {
   getAll,
@@ -36,5 +40,6 @@ export default {
   update,
   remove,
   removeAll,
-  findByTitle
+  findByTitle,
+  findByStatus
 };

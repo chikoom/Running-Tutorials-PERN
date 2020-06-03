@@ -42,7 +42,10 @@ exports.create = (req, res) => {
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title;
+  const status = req.query.status;
   var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
+  condition = status ? { status } : condition;
+  console.log(condition)
 
   Tutorial.findAll({ where: condition })
     .then(data => {
