@@ -10,7 +10,8 @@ const Tutorial = props => {
     published: false,
     status: "waiting",
     link: "",
-    publisher:""
+    publisher:"",
+    imgurl:""
   };
   const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
   const [message, setMessage] = useState("");
@@ -157,6 +158,19 @@ const Tutorial = props => {
                 <option>started</option>
                 <option>done</option>
               </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="imgurl">Image</label>
+              <input
+                type="text"
+                className="form-control"
+                id="imgurl"
+                required
+                value={currentTutorial.imgurl}
+                onChange={handleInputChange}
+                name="imgurl"
+              />
             </div>
 
             <div className="form-group">

@@ -21,6 +21,7 @@ exports.create = (req, res) => {
     status: req.body.status ? req.body.status : 'waiting',
     link: req.body.link,
     publisher: req.body.publisher,
+    imgurl: req.body.imgurl
   };
 
   // Save Tutorial in the database

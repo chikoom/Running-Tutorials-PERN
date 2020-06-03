@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function App() {
+export default function App(props) {
   const [image, setImage] = useState({ preview: "", raw: "" });
 
   const handleChange = e => {
@@ -15,15 +15,35 @@ export default function App() {
   const handleUpload = async e => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("image", image.raw);
+    formData.append("file", image.raw);
+    //formData.append("api_key", '813213351239598');
+    //formData.append("api_secret", 'Z-XrqgZVyR3pALVwujCKSLME0ys');
 
-    await fetch("YOUR_URL", {
-      method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data"
-      },
+
+    formData.append('upload_preset', 'cloudtutupload');
+    const options = {
+      method: 'POST',
       body: formData
-    });
+    };
+
+    // replace cloudname with your Cloudinary cloud_name
+    const upload_return =  fetch('https://api.Cloudinary.com/v1_1/chikoom/image/upload', options)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        props.onImgUpdate(res.url)
+      })
+      .catch(err => console.log(err));
+
+    console.log(upload_return)
+
+  //   await fetch("YOUR_URL", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "multipart/form-data"
+  //     },
+  //     body: formData
+  //   });
   };
 
   return (

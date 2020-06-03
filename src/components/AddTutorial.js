@@ -11,7 +11,8 @@ const AddTutorial = () => {
     published: false,
     status: "waiting",
     link: "",
-    publisher:""
+    publisher:"",
+    imgurl: ""
   };
   const [tutorial, setTutorial] = useState(initialTutorialState);
   const [submitted, setSubmitted] = useState(false);
@@ -28,7 +29,8 @@ const AddTutorial = () => {
       notes: tutorial.notes,
       status: tutorial.status,
       link: tutorial.link,
-      publisher: tutorial.publisher
+      publisher: tutorial.publisher,
+      imgurl: tutorial.imgurl
     };
 
     TutorialDataService.create(data)
@@ -42,6 +44,7 @@ const AddTutorial = () => {
           status: response.data.status,
           link: response.data.link,
           publisher: response.data.publisher,
+          imgurl: response.data.imgurl
         });
         setSubmitted(true);
         console.log(response.data);
@@ -55,6 +58,11 @@ const AddTutorial = () => {
     setTutorial(initialTutorialState);
     setSubmitted(false);
   };
+
+  const updateImgurl = (value) => {
+    console.log('change img value: '+value);
+    setTutorial({ ...tutorial, 'imgurl': value });
+  }
 
   return (
     <div className="submit-form">
@@ -146,9 +154,22 @@ const AddTutorial = () => {
               <option>started</option>
               <option>done</option>
             </select>
-
-            <ImageInput />
           </div>
+
+          <div className="form-group">
+            <label htmlFor="imgurl">Image Url</label>
+            <input
+              type="text"
+              className="form-control"
+              id="imgurl"
+              required
+              value={tutorial.imgurl}
+              onChange={handleInputChange}
+              name="imgurl"
+            />
+          </div>
+
+          <ImageInput onImgUpdate={updateImgurl} />
 
           <button onClick={saveTutorial} className="btn btn-success">
             Submit

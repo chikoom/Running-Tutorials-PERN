@@ -21,6 +21,9 @@ module.exports = (sequelize, Sequelize) => {
     publisher: {
       type: Sequelize.STRING
     },
+    imgurl: {
+      type: Sequelize.STRING
+    },
   });
 
   return Tutorial;
