@@ -89,9 +89,26 @@
 
 .tutorial-preview-container{
   display: none;
+  padding: .75rem 1.25rem;
 }
 
 .tutorial-preview-container.active{
   display: block;
 }
 
+.list-group-item {
+  padding: 0;
+}
+.list-tutorial-item-heading
+{
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: .75rem 1.25rem;
+}
+
+.btn-close-active-tutorial{
+  position: absolute;
+  right: 0;
+  top: 0;
+}

@@ -2,8 +2,8 @@ import React from "react";
 
 const HeroImage = () => {
   return (
-    <div class="hero-image">
-      <div class="hero-text">
+    <div className="hero-image">
+      <div className="hero-text">
         <h1>My Tutorials</h1>
         <p>Follow up on my online lessons</p>
         <p>Chikoom - Idan Baron</p>

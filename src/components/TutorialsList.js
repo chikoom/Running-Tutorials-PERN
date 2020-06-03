@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TutorialDataService from '../services/TutorialService';
 import { Link } from 'react-router-dom';
 import defaultImage from '../assets/default-tut-image.jpg';
+import TitledTutorialList from './TitledTutorialList';
 import TutorailPreview from './TutorialPreview';
 
 const TutorialsList = ({status}) => {
@@ -86,10 +87,6 @@ const TutorialsList = ({status}) => {
       });
   };
 
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
   return (
     <div className="list row">
       <div className="col-md-8">
@@ -112,65 +109,26 @@ const TutorialsList = ({status}) => {
           </div>
         </div>
       </div>
-      <div className="col-md-6">
-        <h4 className="list-tutorial-heading">Started Tutorials List</h4>
+      <div className="col-md-8">
 
-        <ul className="list-group">
-          {startedTutorials &&
-            startedTutorials.map((tutorial, index) => (
-              <li
-                className={
-                  "list-group-item " + (tutorial.id === currentId ? "active" : "")
-                }
-                onClick={() => setActiveTutorial(tutorial, tutorial.id)}
-                key={tutorial.id}
-              >
-                {tutorial.title}
-
-
-              <TutorailPreview tutorial={tutorial} isActive={tutorial.id === currentId ? true : false} />
-              
-              </li>
-            ))}
-        </ul>
-
-        <h4 className="list-tutorial-heading">Waiting Tutorials List</h4>
-
-        <ul className="list-group">
-          {waitingTutorials &&
-            waitingTutorials.map((tutorial, index) => (
-              <li
-                className={
-                  "list-group-item " + (tutorial.id === currentId ? "active" : "")
-                }
-                onClick={() => setActiveTutorial(tutorial, tutorial.id)}
-                key={tutorial.id}
-              >
-                {tutorial.title}
-
-                <TutorailPreview tutorial={tutorial} isActive={tutorial.id === currentId ? true : false} />
-              </li>
-            ))}
-        </ul>
+        <TitledTutorialList heading="Started Tutorials List"
+                            tutorials={startedTutorials} 
+                            currentId={currentId}
+                            setActiveTutorial={setActiveTutorial}
+                            />
         
-        <h4 className="list-tutorial-heading">Done Tutorials List</h4>
-
-        <ul className="list-group">
-          {doneTutorials &&
-            doneTutorials.map((tutorial, index) => (
-              <li
-                className={
-                  "list-group-item " + (tutorial.id === currentId ? "active" : "")
-                }
-                onClick={() => setActiveTutorial(tutorial, tutorial.id)}
-                key={tutorial.id}
-              >
-                {tutorial.title}
-
-                <TutorailPreview tutorial={tutorial} isActive={tutorial.id === currentId ? true : false} />
-              </li>
-            ))}
-        </ul>
+        <TitledTutorialList heading="Waiting Tutorials List"
+                            tutorials={waitingTutorials} 
+                            currentId={currentId}
+                            setActiveTutorial={setActiveTutorial}
+                            />
+        
+        <TitledTutorialList heading="Done Tutorials List"
+                            tutorials={doneTutorials} 
+                            currentId={currentId}
+                            setActiveTutorial={setActiveTutorial}
+                            />
+        
 
         <button
           className="m-3 btn btn-sm btn-danger"
@@ -178,70 +136,6 @@ const TutorialsList = ({status}) => {
         >
           Remove All
         </button>
-      </div>
-      <div className="col-md-6">
-        {currentTutorial ? (
-          <div>
-            <div className="tutorial-preview-image" style={{backgroundImage:`url(${(currentTutorial.imgurl)? currentTutorial.imgurl : defaultImage})`}}></div>
-            <h4>{currentTutorial.title}</h4>
-            <div>
-              <label>
-                <strong>Description:</strong>
-              </label>{" "}
-              {currentTutorial.description}
-            </div>
-            <div>
-              <label>
-                <strong>Notes:</strong>
-              </label>{" "}
-              {currentTutorial.notes}
-            </div>
-            <div>
-              <label>
-                <strong>Publisher:</strong>
-              </label>{" "}
-              {currentTutorial.publisher}
-            </div>
-            <div>
-              <label>
-                <strong>Link:</strong>
-              </label>{" "}
-              {currentTutorial.link}
-            </div>
-            <div>
-              <label>
-                <strong>Status:</strong>
-              </label>{" "}
-              {currentTutorial.status}
-            </div>
-
-            <div>
-              <label>
-                <strong>Is publsihed:</strong>
-              </label>{" "}
-              {currentTutorial.published ? "Published" : "Pending"}
-            </div>
-
-            <div>
-              <label>
-                <strong>Image:</strong>
-              </label>{" "}
-              {currentTutorial.imgurl}
-            </div>
-
-            <Link
-              to={"/tutorials/" + currentTutorial.id}
-              className="badge badge-warning"
-            >
-              Edit
-            </Link>
-          </div>
-        ) : (
-          <div>
-            <br />
-            <p>Please click on a Tutorial...</p>
-          </div>
-        )}
       </div>
     </div>
   );
