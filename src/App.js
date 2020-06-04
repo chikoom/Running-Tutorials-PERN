@@ -10,6 +10,7 @@ import HeroImage from './components/HeroImage';
 import NavBar from './components/NavBar';
 
 
+
 function App() {
   return (
 
@@ -19,7 +20,7 @@ function App() {
 
         <div className="container mt-3">
             
-            <Route exact path={["/", "/tutorials"]} render={() => (
+            <Route exact path="/" render={() => (
               <TutorialsList 
               status="started" 
               />

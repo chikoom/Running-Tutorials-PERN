@@ -43,13 +43,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //const db = require("./app/models/tutorial.model.js");
 
 const db = require('./app/models/index.js');
+const Role = db.role;
 
 
-// re-sync db with drop tables for development
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
-db.sequelize.sync(); // for production
+db.sequelize.sync({force: true}).then(() => {
+  console.log('Drop and Resync Db');
+  initial();
+});
+//db.sequelize.sync(); // for production
+
+function initial() {
+  Role.create({
+    id: 1,
+    name: "user"
+  });
+ 
+  Role.create({
+    id: 2,
+    name: "moderator"
+  });
+ 
+  Role.create({
+    id: 3,
+    name: "admin"
+  });
+}
+
+
+
 
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
