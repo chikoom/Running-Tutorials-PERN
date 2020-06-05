@@ -6,6 +6,7 @@ const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 
 
+
 const cors = require("cors");
 const path = require('path');
 
@@ -72,7 +73,8 @@ db.sequelize.sync(); // for production
 // }
 
 
-
+require('./app/routes/auth.routes')(app);
+require('./app/routes/user.routes')(app);
 
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
