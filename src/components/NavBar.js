@@ -32,10 +32,20 @@ const NavBar = () => {
         <div className="navbar-nav mr-auto">
        
           <li className="nav-item">
-            <Link to={'/add'} className="nav-link">
-              Add
+            <Link to={'/allTutorials'} className="nav-link">
+              All Tutorials
             </Link>
           </li>
+
+          {currentUser && (
+              <li className="nav-item">
+                <Link to={'/add'} className="nav-link">
+                  Add
+                </Link>
+              </li>
+            )}
+
+          
 
           {showModeratorBoard && (
               <li className="nav-item">

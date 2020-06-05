@@ -29,14 +29,13 @@ function App() {
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
-
     if (user) {
       setCurrentUser(user);
       setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
       setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
+    
   }, []);
-
   const logOut = () => {
     AuthService.logout();
   };
@@ -50,14 +49,31 @@ function App() {
             
             <Route exact path="/" render={() => (
               <TutorialsList 
-              status="started"
-              userId="1" 
+                status="started"
+                userId="1" 
               />
             )} />
-            <Route exact path="/add" component={AddTutorial} />
-            <Route path="/tutorials/:id" component={Tutorial} />
 
-            <Route exact path={["/", "/home"]} component={Home} />
+            <Route exact path="/allTutorials" render={() => (
+              <TutorialsList 
+                status="all"
+                userId="0" 
+              />
+            )} />
+
+            {currentUser && (
+              <Route path="/tutorials/user/:userid" render={() => (
+                <TutorialsList 
+                status="started"
+                userId={currentUser.id}
+                />
+              )} />
+            )}
+            
+            <Route exact path="/add" component={AddTutorial} />
+            <Route exact path="/tutorials/:id" component={Tutorial} />
+
+            <Route exact path="/home" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />

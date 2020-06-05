@@ -14,6 +14,8 @@ const TutorialsList = ({status, userId}) => {
     retrieveTutorials();
   }, []);
 
+
+
   const onChangeSearchTitle = e => {
     const searchTitle = e.target.value;
     setSearchTitle(searchTitle);
@@ -22,7 +24,10 @@ const TutorialsList = ({status, userId}) => {
   };
 
   const retrieveTutorials = () => {
-    TutorialDataService.getAllForUserId(userId)
+    
+    if (userId === "0") {
+
+      TutorialDataService.getAll()
       .then(response => {
         setTutorials(response.data);
         setTutorialsShown(response.data);
@@ -30,6 +35,18 @@ const TutorialsList = ({status, userId}) => {
       .catch(e => {
         console.log(e);
       });
+
+    } else {
+      TutorialDataService.getAllForUserId(userId)
+      .then(response => {
+        setTutorials(response.data);
+        setTutorialsShown(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+    }
+    
   };
 
   const refreshList = () => {
@@ -86,26 +103,39 @@ const TutorialsList = ({status, userId}) => {
       </div>
       <div className="col-md-8">
 
-        <TitledTutorialList heading="Started Tutorials:"
-                            tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'started')}
-                            currentId={currentId}
-                            setActiveTutorial={setActiveTutorial}
-                            statusClass="started"
-                            />
+        {status === 'all' ? (
+          <TitledTutorialList heading="All Tutorials:"
+            tutorials={tutorialsShown}
+            currentId={currentId}
+            setActiveTutorial={setActiveTutorial}
+            statusClass="started"
+          />
+        ) : (
+          <div>
+            <TitledTutorialList heading="Started Tutorials:"
+                              tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'started')}
+                              currentId={currentId}
+                              setActiveTutorial={setActiveTutorial}
+                              statusClass="started"
+                              />
+          
+            <TitledTutorialList heading="Waiting Tutorials:"
+                              tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'waiting')} 
+                              currentId={currentId}
+                              setActiveTutorial={setActiveTutorial}
+                              statusClass="waiting"
+                              />
+          
+            <TitledTutorialList heading="Finished Tutorials:"
+                              tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'done')} 
+                              currentId={currentId}
+                              setActiveTutorial={setActiveTutorial}
+                              statusClass="done"
+                              />
+          </div>
+        )}
+
         
-        <TitledTutorialList heading="Waiting Tutorials:"
-                            tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'waiting')} 
-                            currentId={currentId}
-                            setActiveTutorial={setActiveTutorial}
-                            statusClass="waiting"
-                            />
-        
-        <TitledTutorialList heading="Finished Tutorials:"
-                            tutorials={tutorialsShown.filter(tutorial => tutorial.status === 'done')} 
-                            currentId={currentId}
-                            setActiveTutorial={setActiveTutorial}
-                            statusClass="done"
-                            />
         
 
         <button
