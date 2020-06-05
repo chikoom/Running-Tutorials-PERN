@@ -1,6 +1,5 @@
-const optionalRequire = require('optional-require');
 
-const localenv = optionalRequire('../config/env.js');
+
 
 const Sequelize = require('sequelize');
 
@@ -40,19 +39,25 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
  
 db.tutorials = require('./tutorial.model.js')(sequelize, Sequelize);
-db.user = require("./user.model.js")(sequelize, Sequelize);
-db.role = require("./role.model.js")(sequelize, Sequelize);
+db.users = require("./user.model.js")(sequelize, Sequelize);
+db.roles = require("./role.model.js")(sequelize, Sequelize);
 
-db.role.belongsToMany(db.user, {
+db.roles.belongsToMany(db.users, {
   through: "user_roles",
   foreignKey: "roleId",
   otherKey: "userId"
 });
 
-db.user.belongsToMany(db.role, {
+db.users.belongsToMany(db.roles, {
   through: "user_roles",
   foreignKey: "userId",
   otherKey: "roleId"
+});
+
+db.users.hasMany(db.tutorials, { as: "tutorials" });
+db.tutorials.belongsTo(db.users, {
+  foreignKey: "userId",
+  as: "user",
 });
 
 db.ROLES = ["user", "admin", "moderator"];

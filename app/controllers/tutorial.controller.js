@@ -21,7 +21,8 @@ exports.create = (req, res) => {
     status: req.body.status ? req.body.status : 'waiting',
     link: req.body.link,
     publisher: req.body.publisher,
-    imgurl: req.body.imgurl
+    imgurl: req.body.imgurl,
+    userId: req.body.userId
   };
 
   // Save Tutorial in the database
@@ -144,6 +145,20 @@ exports.deleteAll = (req, res) => {
 // Find all published Tutorials
 exports.findAllPublished = (req, res) => {
   Tutorial.findAll({ where: { published: true } })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};
+
+// Find all Tutorials for a given used ID
+exports.findAllForUserId = (req, res) => {
+  Tutorial.findAll({ where: { userId: req.params.userid } })
     .then(data => {
       res.send(data);
     })

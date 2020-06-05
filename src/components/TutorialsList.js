@@ -3,7 +3,7 @@ import TutorialDataService from '../services/TutorialService';
 import TitledTutorialList from './TitledTutorialList';
 import escapeRegExp from 'escape-string-regexp'
 
-const TutorialsList = ({status}) => {
+const TutorialsList = ({status, userId}) => {
   const [tutorials, setTutorials] = useState([]);
   const [tutorialsShown, setTutorialsShown] = useState([]);
 
@@ -22,7 +22,7 @@ const TutorialsList = ({status}) => {
   };
 
   const retrieveTutorials = () => {
-    TutorialDataService.getAll()
+    TutorialDataService.getAllForUserId(userId)
       .then(response => {
         setTutorials(response.data);
         setTutorialsShown(response.data);

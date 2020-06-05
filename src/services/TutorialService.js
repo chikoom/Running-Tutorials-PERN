@@ -4,6 +4,10 @@ const getAll = () => {
   return http.get("/tutorials");
 };
 
+const getAllForUserId = userId => {
+  return http.get(`/tutorials/user/${userId}`);
+};
+
 const get = id => {
   return http.get(`/tutorials/${id}`);
 };
@@ -41,5 +45,6 @@ export default {
   remove,
   removeAll,
   findByTitle,
-  findByStatus
+  findByStatus,
+  getAllForUserId
 };

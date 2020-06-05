@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import TutorialDataService from "../services/TutorialService";
-import ImageInput from '../services/ImageInput'
+import ImageInput from '../services/ImageInput';
+import AuthService from "../services/auth.service";
 
 const AddTutorial = () => {
+
+  const currentUser = AuthService.getCurrentUser();
+
   const initialTutorialState = {
     id: null,
     title: "",
@@ -12,7 +16,8 @@ const AddTutorial = () => {
     status: "waiting",
     link: "",
     publisher:"",
-    imgurl: ""
+    imgurl: "",
+    userId: (currentUser) ? currentUser.id : 0,
   };
   const [tutorial, setTutorial] = useState(initialTutorialState);
   const [submitted, setSubmitted] = useState(false);
@@ -30,7 +35,8 @@ const AddTutorial = () => {
       status: tutorial.status,
       link: tutorial.link,
       publisher: tutorial.publisher,
-      imgurl: tutorial.imgurl
+      imgurl: tutorial.imgurl,
+      userId: tutorial.userId
     };
 
     TutorialDataService.create(data)
@@ -44,7 +50,8 @@ const AddTutorial = () => {
           status: response.data.status,
           link: response.data.link,
           publisher: response.data.publisher,
-          imgurl: response.data.imgurl
+          imgurl: response.data.imgurl,
+          userId: response.data.userId
         });
         setSubmitted(true);
         console.log(response.data);
@@ -154,6 +161,19 @@ const AddTutorial = () => {
               <option>started</option>
               <option>done</option>
             </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="userId">userId</label>
+            <input
+              type="text"
+              className="form-control"
+              id="userId"
+              required
+              value={tutorial.userId}
+              onChange={handleInputChange}
+              name="userId"
+            />
           </div>
 
           <div className="form-group">

@@ -1,6 +1,6 @@
 const db = require("../models");
-const User = db.user;
-const Role = db.role;
+const User = db.users;
+const Role = db.roles;
 
 const Op = db.Sequelize.Op;
 

@@ -50,7 +50,8 @@ function App() {
             
             <Route exact path="/" render={() => (
               <TutorialsList 
-              status="started" 
+              status="started"
+              userId="1" 
               />
             )} />
             <Route exact path="/add" component={AddTutorial} />

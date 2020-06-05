@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //const db = require("./app/models/tutorial.model.js");
 
 const db = require('./app/models/index.js');
-//const Role = db.role;
+
 
 
 db.sequelize.sync(); // for production
@@ -54,7 +54,7 @@ db.sequelize.sync(); // for production
 //   initial();
 // });
 
-
+// const Role = db.roles;
 // function initial() {
 //   Role.create({
 //     id: 1,
