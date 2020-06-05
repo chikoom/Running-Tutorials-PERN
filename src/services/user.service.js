@@ -1,8 +1,8 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-let baseurl = (window.location.hostname === 'localhost') ? 'http://localhost:8081' : 'https://running-tutorials.herokuapp.com/';
-const API_URL = `${baseurl}/api/test/`;
+let baseurl = (window.location.hostname === 'localhost') ? 'http://localhost:8081/' : 'https://running-tutorials.herokuapp.com/';
+const API_URL = `${baseurl}api/test/`;
 
 const getPublicContent = () => {
   return axios.get(API_URL + "all");

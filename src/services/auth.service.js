@@ -1,8 +1,8 @@
 import axios from "axios";
 
 
-let baseurl = (window.location.hostname === 'localhost') ? 'http://localhost:8081' : 'https://running-tutorials.herokuapp.com/';
-const API_URL = `${baseurl}/api/auth/`;
+let baseurl = (window.location.hostname === 'localhost') ? 'http://localhost:8081/' : 'https://running-tutorials.herokuapp.com/';
+const API_URL = `${baseurl}api/auth/`;
 
 const register = (username, email, password) => {
   return axios.post(API_URL + "signup", {
