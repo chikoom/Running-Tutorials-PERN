@@ -138,12 +138,7 @@ const TutorialsList = ({status, userId}) => {
         
         
 
-        <button
-          className="m-3 btn btn-sm btn-danger"
-          onClick={removeAllTutorials}
-        >
-          Remove All
-        </button>
+        
       </div>
     </div>
   );

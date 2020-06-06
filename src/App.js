@@ -19,6 +19,7 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
+import Footer from './components/Footer'
 
 
 
@@ -47,12 +48,14 @@ function App() {
 
         <div className="container mt-3">
             
-            <Route exact path="/" render={() => (
+            <Route exact path="/" component={Home} />
+            
+            {/* <Route exact path="/" render={() => (
               <TutorialsList 
                 status="started"
                 userId="1" 
               />
-            )} />
+            )} /> */}
 
             <Route exact path="/allTutorials" render={() => (
               <TutorialsList 
@@ -81,7 +84,11 @@ function App() {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
         </div>
+        <br/>
+        <hr />
+        <Footer />
       </div>
+
 
   );
 }
